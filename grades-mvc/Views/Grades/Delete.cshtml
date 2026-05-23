@@ -1,0 +1,22 @@
+﻿@model grades_mvc.ViewModels.GradeViewModel
+@{
+    ViewData["Title"] = "Delete Grade";
+}
+<div class="page-header">
+    <div><h1>Delete Grade</h1><p>This action cannot be undone</p></div>
+    <a asp-action="Index" class="btn btn-ghost">← Back</a>
+</div>
+<div class="delete-box">
+    <h2>Delete this grade record?</h2>
+    <p>You are about to permanently remove the grade for <strong>@Model.StudentFullName</strong> in <strong>@Model.CourseName</strong>.</p>
+    <div class="detail-row" style="border:none;padding:6px 0;"><div class="detail-label">Student</div><div class="detail-value">@Model.StudentFullName</div></div>
+    <div class="detail-row" style="border:none;padding:6px 0;"><div class="detail-label">Course</div><div class="detail-value">@Model.CourseName</div></div>
+    <div class="detail-row" style="border:none;padding:6px 0;"><div class="detail-label">Score</div><div class="detail-value">@Model.Score</div></div>
+    <form asp-action="Delete" style="margin-top:1.25rem;">
+        <input type="hidden" name="id" value="@Model.GradeId" />
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a asp-action="Index" class="btn btn-ghost">Cancel</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<grades_mvc.ViewModels.GradeViewModel>
+@{
+    ViewData["Title"] = "Grades";
+    var list = Model.ToList();
+}
+<div class="page-header">
+    <div><h1>Grades</h1><p>@list.Count grade record@(list.Count != 1 ? "s" : "") total</p></div>
+    <a asp-action="Create" class="btn btn-primary">+ Add Grade</a>
+</div>
+@if (ViewBag.Warning != null)
+{
+    <div class="alert alert-warning">⚠ @ViewBag.Warning</div>
+}
+@if (!list.Any())
+{
+    <div class="empty">
+        <div class="empty-icon">📊</div>
+        <h3>No grades yet</h3>
+        <p>Add your first grade record to get started.</p>
+    </div>
+}
+else
+{
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Student</th><th>Course</th><th>Score</th><th>Date</th><th>Actions</th></tr></thead>
+            <tbody>
+                @foreach (var g in list)
+                {
+                    var sc = g.Score >= 85 ? "score-high" : g.Score >= 60 ? "score-mid" : "score-low";
+                    <tr>
+                        <td>@g.StudentFullName</td>
+                        <td>@g.CourseName</td>
+                        <td><span class="score-badge @sc">@g.Score</span></td>
+                        <td>@g.GradeDate.ToShortDateString()</td>
+                        <td>
+                            <div class="actions">
+                                <a asp-action="Details" asp-route-id="@g.GradeId" class="btn btn-sm btn-info">Details</a>
+                                <a asp-action="Edit" asp-route-id="@g.GradeId" class="btn btn-sm btn-warn">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@g.GradeId" class="btn btn-sm btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<students_mvc.Models.Student>
+@{
+    ViewData["Title"] = "Students";
+    var list = Model.ToList();
+}
+<div class="page-header">
+    <div>
+        <h1>Students</h1>
+        <p>@list.Count student@(list.Count != 1 ? "s" : "") enrolled</p>
+    </div>
+    <a asp-action="Create" class="btn btn-primary">+ Add Student</a>
+</div>
+@if (!list.Any())
+{
+    <div class="empty">
+        <div class="empty-icon">🎓</div>
+        <h3>No students yet</h3>
+        <p>Add your first student to get started.</p>
+    </div>
+}
+else
+{
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Email</th>
+                    <th>Date of Birth</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var s in list)
+                {
+                    var initials = (s.FirstName.Length > 0 ? s.FirstName[0].ToString() : "") +
+                    (s.LastName.Length > 0 ? s.LastName[0].ToString() : "");
+                    <tr>
+                        <td><div class="cell-name"><div class="avatar">@initials</div>@s.FullName</div></td>
+                        <td>@s.Email</td>
+                        <td>@s.DateOfBirth.ToShortDateString()</td>
+                        <td>
+                            <div class="actions">
+                                <a asp-action="Details" asp-route-id="@s.Id" class="btn btn-sm btn-info">Details</a>
+                                <a asp-action="Edit" asp-route-id="@s.Id" class="btn btn-sm btn-warn">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@s.Id" class="btn btn-sm btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

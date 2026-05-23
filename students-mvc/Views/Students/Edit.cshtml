@@ -1,0 +1,36 @@
+﻿@model students_mvc.Models.Student
+@{
+    ViewData["Title"] = "Edit Student";
+}
+<div class="page-header">
+    <div><h1>Edit Student</h1><p>Update the details for @Model.FullName</p></div>
+    <a asp-action="Index" class="btn btn-ghost">← Back</a>
+</div>
+<form asp-action="Edit" class="form-card">
+    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="ModelOnly" class="text-danger" style="margin-bottom:1rem;"></div>
+    <div class="form-group">
+        <label asp-for="FirstName">First Name</label>
+        <input asp-for="FirstName" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName">Last Name</label>
+        <input asp-for="LastName" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Email Address</label>
+        <input asp-for="Email" type="email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOfBirth">Date of Birth</label>
+        <input asp-for="DateOfBirth" type="date" />
+        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+    </div>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-warn">Update Student</button>
+        <a asp-action="Index" class="btn btn-ghost">Cancel</a>
+    </div>
+</form>

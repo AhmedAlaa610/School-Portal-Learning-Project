@@ -1,0 +1,25 @@
+﻿@model students_mvc.Models.Student
+@{
+    ViewData["Title"] = "Delete Student";
+}
+<div class="page-header">
+    <div><h1>Delete Student</h1><p>This action cannot be undone</p></div>
+    <a asp-action="Index" class="btn btn-ghost">← Back</a>
+</div>
+<div class="delete-box">
+    <h2>Delete @Model.FullName?</h2>
+    <p>You are about to permanently remove this student. Are you sure?</p>
+    <div class="detail-row" style="border:none;padding:6px 0;">
+        <div class="detail-label">Name</div><div class="detail-value">@Model.FullName</div>
+    </div>
+    <div class="detail-row" style="border:none;padding:6px 0;">
+        <div class="detail-label">Email</div><div class="detail-value">@Model.Email</div>
+    </div>
+    <form asp-action="Delete" style="margin-top:1.25rem;">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a asp-action="Index" class="btn btn-ghost">Cancel</a>
+        </div>
+    </form>
+</div>

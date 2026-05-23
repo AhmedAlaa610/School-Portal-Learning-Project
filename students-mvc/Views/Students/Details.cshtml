@@ -1,0 +1,29 @@
+﻿@model students_mvc.Models.Student
+@{
+    ViewData["Title"] = "Student Details";
+    var initials = (Model.FirstName.Length > 0 ? Model.FirstName[0].ToString() : "") +
+                   (Model.LastName.Length > 0 ? Model.LastName[0].ToString() : "");
+}
+<div class="page-header">
+    <div><h1>Student Details</h1><p>Viewing profile for @Model.FullName</p></div>
+    <a asp-action="Index" class="btn btn-ghost">← Back</a>
+</div>
+<div class="detail-card">
+    <div class="detail-header">
+        <div class="detail-avatar">@initials</div>
+        <div>
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;">@Model.FullName</div>
+            <div style="color:var(--muted);font-size:0.85rem;margin-top:3px;">@Model.Email</div>
+        </div>
+    </div>
+    <div class="detail-body">
+        <div class="detail-row"><div class="detail-label">First Name</div><div class="detail-value">@Model.FirstName</div></div>
+        <div class="detail-row"><div class="detail-label">Last Name</div><div class="detail-value">@Model.LastName</div></div>
+        <div class="detail-row"><div class="detail-label">Email</div><div class="detail-value">@Model.Email</div></div>
+        <div class="detail-row"><div class="detail-label">Date of Birth</div><div class="detail-value">@Model.DateOfBirth.ToShortDateString()</div></div>
+    </div>
+</div>
+<div style="display:flex;gap:10px;margin-top:1.5rem;">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warn">Edit</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+</div>

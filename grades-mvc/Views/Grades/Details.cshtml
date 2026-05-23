@@ -1,0 +1,29 @@
+@model grades_mvc.ViewModels.GradeViewModel
+@{
+    ViewData["Title"] = "Grade Details";
+    var sc = Model.Score >= 85 ? "score-high" : Model.Score >= 60 ? "score-mid" : "score-low";
+}
+<div class="page-header">
+    <div><h1>Grade Details</h1><p>Full record for @Model.StudentFullName</p></div>
+    <a asp-action="Index" class="btn btn-ghost">← Back</a>
+</div>
+<div class="detail-card">
+    <div class="detail-header">
+        <div class="detail-icon">📋</div>
+        <div>
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;">@Model.CourseName</div>
+            <div style="color:var(--muted);font-size:0.85rem;margin-top:3px;">@Model.StudentFullName</div>
+        </div>
+    </div>
+    <div class="detail-body">
+        <div class="detail-row"><div class="detail-label">Student</div><div class="detail-value">@Model.StudentFullName</div></div>
+        <div class="detail-row"><div class="detail-label">Course</div><div class="detail-value">@Model.CourseName</div></div>
+        <div class="detail-row"><div class="detail-label">Score</div><div class="detail-value"><span class="score-badge @sc">@Model.Score</span></div></div>
+        <div class="detail-row"><div class="detail-label">Date</div><div class="detail-value">@Model.GradeDate.ToShortDateString()</div></div>
+        <div class="detail-row"><div class="detail-label">Notes</div><div class="detail-value">@(Model.Notes ?? "—")</div></div>
+    </div>
+</div>
+<div style="display:flex;gap:10px;margin-top:1.5rem;">
+    <a asp-action="Edit" asp-route-id="@Model.GradeId" class="btn btn-warn">Edit</a>
+    <a asp-action="Delete" asp-route-id="@Model.GradeId" class="btn btn-danger">Delete</a>
+</div>
